@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\TagController;
 
 
 /*
@@ -32,10 +32,18 @@ Route::group(['middleware' => 'auth:sanctum','prefix' => 'users'], function ($ro
 
 });
 
-Route::group(['middleware' => 'auth:sanctum'], function ($router) {
-    Route::get('/articles', [ArticleController::class, 'index']);
+Route::group(['middleware' => 'auth:sanctum','prefix' => 'articles'], function ($router) {
+    Route::get('/', [ArticleController::class, 'index']);
     Route::post('create', [ArticleController::class, 'store']);
     Route::get('detail/{id}', [ArticleController::class, 'show']);
     Route::post('update/{id}', [ArticleController::class, 'update']);
     Route::post('delete/{id}', [ArticleController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:sanctum','prefix' => 'tags'], function ($router) {
+    Route::get('/', [TagController::class, 'index']);
+    Route::post('create', [TagController::class, 'store']);
+    Route::get('detail/{id}', [TagController::class, 'show']);
+    Route::post('update/{id}', [TagController::class, 'update']);
+    Route::post('delete/{id}', [TagController::class, 'destroy']);
 });
