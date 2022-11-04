@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArticleController;
+
 
 
 /*
@@ -18,8 +20,6 @@ use App\Http\Controllers\UserController;
 */
 
 Route::post('login', [AuthController::class, 'login']);
-
-
 Route::group(['middleware' => 'auth:sanctum','prefix' => 'users'], function ($router) {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('create', [UserController::class, 'store']);
@@ -30,4 +30,12 @@ Route::group(['middleware' => 'auth:sanctum','prefix' => 'users'], function ($ro
     Route::post('update-profile', [UserController::class, 'updateProfile']);
     Route::post('delete/{id}', [UserController::class, 'destroy']);
 
+});
+
+Route::group(['middleware' => 'auth:sanctum'], function ($router) {
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::post('create', [ArticleController::class, 'store']);
+    Route::get('detail/{id}', [ArticleController::class, 'show']);
+    Route::post('update/{id}', [ArticleController::class, 'update']);
+    Route::post('delete/{id}', [ArticleController::class, 'destroy']);
 });

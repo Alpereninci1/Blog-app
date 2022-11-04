@@ -2,10 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
+
+    use ApiResponser;
+    // Store login User id;
+    private $loginuserid;
+
+    /**
+     * Assign Auth user id to login user id variable.
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware(function($request, $next){
+            $this->loginuserid = Auth::user()->id;
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,18 +36,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $article = Article::all();
+        return $this->successResponse($article);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,16 +63,6 @@ class ArticleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
