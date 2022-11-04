@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('surname');
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_user_id');
+            $table->unsignedBigInteger('updated_user_id');
             $table->timestamps();
         });
     }

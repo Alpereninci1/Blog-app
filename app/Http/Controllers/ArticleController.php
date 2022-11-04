@@ -36,7 +36,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Articles::all();
+        $articles = Article::all();
         return $this->successResponse($articles);
     }
 
@@ -81,7 +81,6 @@ class ArticleController extends Controller
             return $this->successResponse($article);
         }
         return $this->errorResponse('Page Not Found',Response::HTTP_NOT_FOUND);
-
     }
 
 

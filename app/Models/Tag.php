@@ -13,14 +13,21 @@ class Tag extends Model
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    // *********************** START PARENT CLASS *****************************
-
+    
     /**
      * Get the user associated with the report.
      */
     public function articles()
     {
         return $this->belongsTo(Article::class);
+    }
+
+    /**
+     * Get the user associated with the report.
+     */
+    public function categories()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

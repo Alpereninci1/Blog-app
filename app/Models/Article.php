@@ -21,7 +21,6 @@ class Article extends Model
         return $this->hasMany(Tag::class);
     }
 
-
     /**
      * The attributes that aren't mass assignable.
      *

@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_id')->references('id')->on('tags');
+            $table->string('name');
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_user_id');
+            $table->unsignedBigInteger('updated_user_id');
             $table->timestamps();
         });
     }

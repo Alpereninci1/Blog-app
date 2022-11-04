@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_user_id');
+            $table->unsignedBigInteger('updated_user_id');
             $table->timestamps();
         });
     }

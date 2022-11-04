@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubscriberController;
 
 
 /*
@@ -46,4 +49,28 @@ Route::group(['middleware' => 'auth:sanctum','prefix' => 'tags'], function ($rou
     Route::get('detail/{id}', [TagController::class, 'show']);
     Route::post('update/{id}', [TagController::class, 'update']);
     Route::post('delete/{id}', [TagController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:sanctum','prefix' => 'authors'], function ($router) {
+    Route::get('/', [AuthorController::class, 'index']);
+    Route::post('create', [AuthorController::class, 'store']);
+    Route::get('detail/{id}', [AuthorController::class, 'show']);
+    Route::post('update/{id}', [AuthorController::class, 'update']);
+    Route::post('delete/{id}', [AuthorController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:sanctum','prefix' => 'categories'], function ($router) {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::post('create', [CategoryController::class, 'store']);
+    Route::get('detail/{id}', [CategoryController::class, 'show']);
+    Route::post('update/{id}', [CategoryController::class, 'update']);
+    Route::post('delete/{id}', [CategoryController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'auth:sanctum','prefix' => 'subscribers'], function ($router) {
+    Route::get('/', [SubscriberController::class, 'index']);
+    Route::post('create', [SubscriberController::class, 'store']);
+    Route::get('detail/{id}', [SubscriberController::class, 'show']);
+    Route::post('update/{id}', [SubscriberController::class, 'update']);
+    Route::post('delete/{id}', [SubscriberController::class, 'destroy']);
 });
